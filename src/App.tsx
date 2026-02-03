@@ -60,11 +60,11 @@ export default function App() {
           element={
             <>
               <HeroSection />
-              <TrustSection />
+              {/* <TrustSection /> */}
               <ProblemSection />
               <CloverFlowSection />
               <WhatItIsSection />
-              <CaseStudiesSection />
+               {/* <CaseStudiesSection /> */}
               <CapabilitiesSection />
               <EnablementLayerSection />
               <CTASection />

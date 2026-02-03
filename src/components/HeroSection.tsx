@@ -44,17 +44,21 @@ export function HeroSection() {
       {/* Decorative Elements */}
 
 
-      <div className="absolute top-20 left-5">
-        <svg width="150" height="100" viewBox="0 0 150 100">
-          <ellipse cx="75" cy="50" rx="70" ry="40" fill="#FACC15" opacity="0.9" />
-        </svg>
+      <div className="absolute top-10 left-5">
+        <img
+          src="/zebra_circle.svg"
+          alt=""
+          className="w-[150px] h-[100px]"
+        />
       </div>
 
-      <div className="absolute top-40 left-20">
-        <svg width="100" height="100" viewBox="0 0 100 100">
-          <circle cx="50" cy="30" r="25" fill="#3B82F6" />
-        </svg>
-      </div>
+      {/* <div className="absolute top-35 left-25">
+        <img
+          src="/zebra_yoyo.svg"
+          alt=""
+          className="w-[150px] h-[150px]"
+        />
+      </div> */}
 
       <div className="absolute bottom-0 left-0 w-32 h-96 bg-[#3B82F6] rounded-tr-full opacity-80" />
     </section>

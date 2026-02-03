@@ -65,6 +65,21 @@ const slogans = [
 ];
 
 export function CapabilitiesSection() {
+  const fingerprintForColor = (color: string) => {
+    switch (color.toUpperCase()) {
+      case "#3B82F6":
+        return "/abstract_fingerprint_blue.svg";
+      case "#16D98F":
+        return "/abstract_fingerprint_green.svg";
+      case "#FA7875":
+        return "/abstract_fingerprint_red.svg";
+      case "#FACC15":
+        return "/abstract_fingerprint_yellow.svg";
+      default:
+        return "/abstract_fingerprint_orange.svg";
+    }
+  };
+
   const renderCapabilityCell = (capability: Capability) => {
     return (
       <div
@@ -121,10 +136,13 @@ export function CapabilitiesSection() {
         </div>
 
         {/* Optional abstract geometric shapes (subtle) */}
-        <div className="absolute bottom-0 right-0 w-32 h-32 opacity-10 pointer-events-none">
-          <svg viewBox="0 0 100 100" className="w-full h-full">
-            <circle cx="70" cy="70" r="25" fill="currentColor" className="text-slate-900" />
-          </svg>
+        <div className="absolute bottom-0 right-0 w-32 h-32 opacity-10 p-4 pointer-events-none">
+          <img
+            src={fingerprintForColor(capability.color)}
+            alt=""
+            className="w-full h-full object-contain"
+            aria-hidden="true"
+          />
         </div>
       </div>
     );

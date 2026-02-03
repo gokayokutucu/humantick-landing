@@ -7,6 +7,10 @@ export function Header() {
   const location = useLocation();
   const [mobileOpen, setMobileOpen] = useState(false);
   const [mobileSection, setMobileSection] = useState<string | null>(null);
+  const consoleOrigin = import.meta.env.VITE_CONSOLE_ORIGIN ?? '';
+  const signInHref = consoleOrigin
+    ? `${consoleOrigin.replace(/\/$/, '')}/`
+    : '/';
   
   // Desktop hover menu state
   const [openMenu, setOpenMenu] = useState<string | null>(null);
@@ -124,11 +128,42 @@ export function Header() {
         <div className="hidden md:block fixed inset-0 bg-black/20 z-40" />
       )}
 
-      <header
-        id="site-header"
-        className="sticky top-0 z-50 bg-white/95 backdrop-blur supports-[backdrop-filter]:bg-white/80 border-b border-gray-200"
-      >
-        <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between gap-4">
+      <div className="sticky top-0 z-50">
+        <div className="bg-black text-gray-200 border-b border-white/10">
+          <div className="max-w-7xl mx-auto px-6 py-2">
+            <div role="status" className="flex items-center justify-between gap-4 text-xs sm:text-sm">
+              <div className="hidden md:block">
+                Early Access Registry is open (Mar 2026 cohort).
+              </div>
+              <div className="md:hidden min-w-0 truncate">
+                Early Access Registry open (Mar 2026).
+              </div>
+              <div className="hidden md:flex items-center gap-3">
+                <span>Limited slots for design partners.</span>
+                <a
+                  href="/access/request"
+                  className="text-orange-400 hover:text-orange-300 focus:outline-none focus:ring-2 focus:ring-orange-400/50 rounded"
+                >
+                  Request Access
+                </a>
+              </div>
+              <div className="md:hidden shrink-0">
+                <a
+                  href="/access/request"
+                  className="text-orange-400 hover:text-orange-300 focus:outline-none focus:ring-2 focus:ring-orange-400/50 rounded"
+                >
+                  Request Access
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <header
+          id="site-header"
+          className="bg-white/95 backdrop-blur supports-[backdrop-filter]:bg-white/80 border-b border-gray-200"
+        >
+          <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between gap-4">
           {/* Left: logo */}
           <div className="flex items-center gap-3 shrink-0">
             <a href="/" className="flex items-center">
@@ -195,7 +230,7 @@ export function Header() {
               Request Access
             </a>
             <a
-              href="/login/"
+              href={signInHref}
               className="border border-gray-300 text-gray-900 px-4 py-2 rounded hover:bg-gray-50 transition-colors text-sm whitespace-nowrap"
             >
               Sign in
@@ -329,7 +364,7 @@ export function Header() {
                     Contact
                   </a>
                   <a
-                    href="/login/"
+                    href={signInHref}
                     onClick={closeMobile}
                     className="border border-gray-300 text-gray-900 px-4 py-2 rounded hover:bg-gray-50 transition-colors text-sm"
                   >
@@ -347,7 +382,8 @@ export function Header() {
             </div>
           </div>
         )}
-      </header>
+        </header>
+      </div>
     </>
   );
 }
