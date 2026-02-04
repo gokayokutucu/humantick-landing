@@ -1,7 +1,9 @@
 import { Footer } from '../components/Footer';
 import { useState } from 'react';
+import { getRequestAccessUrl } from '../lib/requestAccessUrl';
 
 export function ContactPage() {
+  const requestAccessUrl = getRequestAccessUrl();
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -193,7 +195,7 @@ export function ContactPage() {
         <div className="max-w-4xl mx-auto px-6 text-center">
           <div className="flex items-center justify-center gap-4 flex-wrap">
             <a
-              href="/access/request"
+              href={requestAccessUrl}
               className="bg-black text-white px-8 py-3 rounded font-semibold hover:bg-gray-900 transition-colors"
             >
               Request Access

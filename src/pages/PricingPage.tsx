@@ -1,7 +1,9 @@
 import { Footer } from '../components/Footer';
+import { getRequestAccessUrl } from '../lib/requestAccessUrl';
 import { useState } from 'react';
 
 export function PricingPage() {
+  const requestAccessUrl = getRequestAccessUrl();
   const [openFaq, setOpenFaq] = useState<number | null>(null);
 
   const principles = [
@@ -112,7 +114,7 @@ export function PricingPage() {
           </p>
 	          <div className="flex items-center justify-center gap-4 flex-wrap">
 	            <a
-	              href="/access/request"
+              href={requestAccessUrl}
 	              className="bg-black text-white px-8 py-3 rounded font-semibold hover:bg-gray-900 transition-colors"
 	            >
 	              Request Access
@@ -217,7 +219,7 @@ export function PricingPage() {
           </div>
 	          <div className="flex items-center justify-center gap-4 flex-wrap">
 	            <a
-	              href="/access/request"
+              href={requestAccessUrl}
 	              className="bg-black text-white px-8 py-3 rounded font-semibold hover:bg-gray-900 transition-colors"
 	            >
 	              Request Access

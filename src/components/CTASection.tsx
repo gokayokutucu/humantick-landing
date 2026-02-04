@@ -1,4 +1,8 @@
+import { getRequestAccessUrl } from "../lib/requestAccessUrl";
+
 export function CTASection() {
+  const requestAccessUrl = getRequestAccessUrl();
+
   return (
     <section className="bg-[#3B82F6] py-20 relative overflow-hidden">
       <div className="max-w-4xl mx-auto px-6 text-center relative z-10">
@@ -16,7 +20,7 @@ export function CTASection() {
         <div className="flex items-center justify-center gap-4 flex-wrap">
           {/* Primary CTA - Get Started (orientation/onboarding) */}
           <a
-            href="/access/request"
+            href={requestAccessUrl}
             className="bg-white text-[#3B82F6] px-8 py-3 rounded font-semibold hover:bg-gray-100 transition-colors"
           >
             Get Started

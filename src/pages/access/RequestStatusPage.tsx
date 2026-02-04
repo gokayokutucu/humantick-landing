@@ -2,6 +2,7 @@ import { useMemo } from "react";
 import { useSearchParams } from "react-router-dom";
 import { Footer } from "../../components/Footer";
 import { findAccessRequestById, loadAccessRequests } from "../../lib/accessRequests";
+import { getRequestAccessUrl } from "../../lib/requestAccessUrl";
 
 function statusLabel(status: string) {
   if (status === "approved") return "Approved";
@@ -10,6 +11,7 @@ function statusLabel(status: string) {
 }
 
 export function RequestStatusPage() {
+  const requestAccessUrl = getRequestAccessUrl();
   const [params] = useSearchParams();
   const requestId = params.get("rid") ?? "";
 
@@ -42,7 +44,7 @@ export function RequestStatusPage() {
                 <code className="text-slate-900">/request-status?rid=&lt;request_id&gt;</code>
               </p>
               <a
-                href="/access/request"
+                href={requestAccessUrl}
                 className="inline-block bg-black text-white px-8 py-3 rounded font-semibold hover:bg-gray-900 transition-colors"
               >
                 Request Access
@@ -54,7 +56,7 @@ export function RequestStatusPage() {
                 No request was found for id <strong className="text-slate-900">{requestId}</strong>.
               </p>
               <a
-                href="/access/request"
+                href={requestAccessUrl}
                 className="inline-block bg-black text-white px-8 py-3 rounded font-semibold hover:bg-gray-900 transition-colors"
               >
                 Request Access
@@ -110,4 +112,3 @@ export function RequestStatusPage() {
     </div>
   );
 }
-

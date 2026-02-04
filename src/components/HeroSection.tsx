@@ -1,4 +1,8 @@
+import { getRequestAccessUrl } from "../lib/requestAccessUrl";
+
 export function HeroSection() {
+  const requestAccessUrl = getRequestAccessUrl();
+
   return (
     <section className="relative bg-[#16D98F] overflow-hidden min-h-screen flex items-center">
       <div className="w-full max-w-screen-xl mx-auto px-6 py-20 relative z-10">
@@ -21,7 +25,7 @@ export function HeroSection() {
             <strong className="font-semibold text-slate-900">Verification</strong> is anchored and <strong className="font-semibold text-slate-900">verifiable anywhere</strong>.
           </p>
           <div className="flex flex-wrap gap-4">
-            <a href="/access/request" className="bg-black text-white px-8 py-3 rounded text-lg hover:bg-gray-900 transition-colors">
+            <a href={requestAccessUrl} className="bg-black text-white px-8 py-3 rounded text-lg hover:bg-gray-900 transition-colors">
               Request Access
             </a>
             <a href="/platform/trust-states" className="bg-transparent border border-black text-black px-8 py-3 rounded text-lg hover:bg-black hover:text-white transition-colors">

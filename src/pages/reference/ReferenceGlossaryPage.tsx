@@ -1,9 +1,11 @@
 import { Footer } from '../../components/Footer';
+import { getRequestAccessUrl } from '../../lib/requestAccessUrl';
 import { useState } from 'react';
 import { ReferenceOnThisPageNav } from '../../components/reference/ReferenceOnThisPageNav';
 import { useScrollSpy } from '../../components/reference/useScrollSpy';
 
 export function ReferenceGlossaryPage() {
+  const requestAccessUrl = getRequestAccessUrl();
   const sections = [
     { id: 'core-trust-protocol-concepts', title: 'Core Trust & Protocol Concepts' },
     { id: 'experience-product-language', title: 'Experience & Product Language' },
@@ -369,7 +371,7 @@ export function ReferenceGlossaryPage() {
               Read the Specification
             </a>
             <a
-              href="/access/request"
+              href={requestAccessUrl}
               className="bg-transparent text-slate-900 px-8 py-3 rounded border-2 border-slate-300 hover:border-slate-400 hover:bg-white transition-colors"
             >
               Request Access

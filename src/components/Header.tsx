@@ -1,6 +1,7 @@
 import { useMemo, useState, useEffect, useRef } from 'react';
 import { useLocation } from 'react-router-dom';
 import { useHeaderHeightCssVar } from './useHeaderHeightCssVar';
+import { getRequestAccessUrl } from '../lib/requestAccessUrl';
 
 export function Header() {
   useHeaderHeightCssVar();
@@ -11,6 +12,7 @@ export function Header() {
   const signInHref = consoleOrigin
     ? `${consoleOrigin.replace(/\/$/, '')}/`
     : '/';
+  const requestAccessUrl = getRequestAccessUrl();
   
   // Desktop hover menu state
   const [openMenu, setOpenMenu] = useState<string | null>(null);
@@ -141,7 +143,7 @@ export function Header() {
               <div className="hidden md:flex items-center gap-3">
                 <span>Limited slots for design partners.</span>
                 <a
-                  href="/access/request"
+                  href={requestAccessUrl}
                   className="text-orange-400 hover:text-orange-300 focus:outline-none focus:ring-2 focus:ring-orange-400/50 rounded"
                 >
                   Request Access
@@ -149,7 +151,7 @@ export function Header() {
               </div>
               <div className="md:hidden shrink-0">
                 <a
-                  href="/access/request"
+                  href={requestAccessUrl}
                   className="text-orange-400 hover:text-orange-300 focus:outline-none focus:ring-2 focus:ring-orange-400/50 rounded"
                 >
                   Request Access
@@ -224,7 +226,7 @@ export function Header() {
               Contact
             </a>
             <a
-              href="/access/request"
+              href={requestAccessUrl}
               className="bg-black text-white px-4 py-2 rounded hover:bg-gray-900 transition-colors text-sm whitespace-nowrap"
             >
               Request Access
@@ -371,7 +373,7 @@ export function Header() {
                     Sign in
                   </a>
                   <a
-                    href="/access/request"
+                    href={requestAccessUrl}
                     onClick={closeMobile}
                     className="bg-black text-white px-4 py-2 rounded hover:bg-gray-900 transition-colors text-sm"
                   >

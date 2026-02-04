@@ -1,10 +1,12 @@
 import { Footer } from '../../components/Footer';
+import { getRequestAccessUrl } from '../../lib/requestAccessUrl';
 import { useState } from 'react';
 import { ReferenceOnThisPageNav } from '../../components/reference/ReferenceOnThisPageNav';
 import { useScrollSpy } from '../../components/reference/useScrollSpy';
 
 
 export function ReferenceSpecificationPage() {
+  const requestAccessUrl = getRequestAccessUrl();
   const sections = [
     { id: 'what-it-defines', title: 'What the specification defines' },
     { id: 'where-to-find-it', title: 'Where to find the authoritative spec' },
@@ -161,7 +163,7 @@ export function ReferenceSpecificationPage() {
               Read the Spec
             </a>
             <a
-              href="/access/request"
+              href={requestAccessUrl}
               className="bg-transparent text-slate-900 px-6 py-2.5 rounded border-2 border-slate-300 hover:border-slate-400 hover:bg-slate-50 transition-colors text-sm font-medium"
             >
               Request Access

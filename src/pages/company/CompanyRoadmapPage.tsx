@@ -1,6 +1,8 @@
 import { Footer } from '../../components/Footer';
+import { getRequestAccessUrl } from '../../lib/requestAccessUrl';
 
 export function CompanyRoadmapPage() {
+  const requestAccessUrl = getRequestAccessUrl();
   const nowItems = [
     {
       title: 'C2PA Integration Profile',
@@ -225,7 +227,7 @@ export function CompanyRoadmapPage() {
         <div className="max-w-4xl mx-auto px-6 text-center">
           <div className="flex items-center justify-center gap-4 flex-wrap">
             <a
-              href="/access/request"
+              href={requestAccessUrl}
               className="bg-black text-white px-8 py-3 rounded font-semibold hover:bg-gray-900 transition-colors"
             >
               Request Access
