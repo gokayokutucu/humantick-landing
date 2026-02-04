@@ -1,6 +1,10 @@
 import { Footer } from '../components/Footer';
 import { useState } from 'react';
 import { getRequestAccessUrl } from '../lib/requestAccessUrl';
+import { TurnstileWidget } from '../components/TurnstileWidget';
+
+const API_BASE =
+  ((import.meta as any).env?.VITE_API_BASE_URL as string | undefined) ?? "http://localhost:5160";
 
 export function ContactPage() {
   const requestAccessUrl = getRequestAccessUrl();
@@ -11,6 +15,10 @@ export function ContactPage() {
     message: '',
   });
   const [submitted, setSubmitted] = useState(false);
+  const [submitError, setSubmitError] = useState<string | null>(null);
+  const [turnstileToken, setTurnstileToken] = useState<string | null>(null);
+  const turnstileSiteKey = (import.meta as any).env?.VITE_TURNSTILE_SITE_KEY as string | undefined;
+  const requiresTurnstile = Boolean(turnstileSiteKey);
 
   const contactRoutes = [
     {
@@ -30,10 +38,40 @@ export function ContactPage() {
     },
   ];
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setSubmitted(true);
-    setTimeout(() => setSubmitted(false), 5000);
+    setSubmitError(null);
+
+    if (requiresTurnstile && !turnstileToken) {
+      setSubmitError("Please complete the verification first.");
+      return;
+    }
+
+    try {
+      const response = await fetch(`${API_BASE}/api/contact`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name: formData.name.trim(),
+          email: formData.email.trim(),
+          topic: formData.topic.trim(),
+          message: formData.message.trim(),
+          turnstile_token: turnstileToken ?? undefined,
+        }),
+      });
+
+      if (!response.ok) {
+        setSubmitError("We could not send your message right now. Please try again.");
+        return;
+      }
+
+      setSubmitted(true);
+      setTimeout(() => setSubmitted(false), 5000);
+      setFormData({ name: '', email: '', topic: '', message: '' });
+      setTurnstileToken(null);
+    } catch {
+      setSubmitError("We could not send your message right now. Please try again.");
+    }
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
@@ -86,6 +124,11 @@ export function ContactPage() {
           {submitted && (
             <div className="mb-6 p-4 bg-green-50 border border-green-200 rounded-lg">
               <p className="text-green-900 font-medium">Thanks — we'll reply soon.</p>
+            </div>
+          )}
+          {submitError && (
+            <div className="mb-6 p-4 bg-rose-50 border border-rose-200 rounded-lg">
+              <p className="text-rose-900 font-medium">{submitError}</p>
             </div>
           )}
 
@@ -156,6 +199,8 @@ export function ContactPage() {
                 className="w-full px-4 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-slate-900 focus:border-transparent"
               />
             </div>
+
+            <TurnstileWidget siteKey={turnstileSiteKey} onToken={setTurnstileToken} />
 
             <button
               type="submit"

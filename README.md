@@ -5,6 +5,7 @@ Build-time variables (Vite):
 - `VITE_API_BASE_URL` (platform public URL)
 - `VITE_CONSOLE_ORIGIN` (console public origin)
 - `VITE_LOGIN_ORIGIN` (login public origin)
+- `VITE_TURNSTILE_SITE_KEY` (optional; enables Turnstile widget)
 
 Request Access is hosted on the login app; landing CTAs link to `${VITE_LOGIN_ORIGIN}/access/request`.
 
